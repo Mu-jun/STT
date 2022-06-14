@@ -7,6 +7,7 @@ result/
 vocab.json
 desktop.ini
 wav2vec2-large-xlsr-turkish-demo/
+wav2vec2-large-xlsr-ko-demo/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
