@@ -15,3 +15,5 @@ jupyter==1.0.0
 datasets==2.2.2
 transformers==4.19.4
 jiwer==2.30
+SpeechRecognition==3.8.1
+pipwin==0.5.2
