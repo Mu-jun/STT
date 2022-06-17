@@ -5,6 +5,7 @@ dataset/
 model/
 result/
 vocab.json
+vocab_jamos.json
 desktop.ini
 wav2vec2-large-xlsr-turkish-demo/
 wav2vec2-large-xlsr-ko-demo/
