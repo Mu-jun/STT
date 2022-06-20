@@ -24,7 +24,10 @@ try:
             sig = rec.listen(mic).get_wav_data(sr,2)
             data_s16 = np.frombuffer(sig, dtype=np.int16, count=len(sig)//2)
             float_data = (data_s16 * 0.5**15).astype(np.float32)
-            service(float_data)
+            if len(float_data) < sr*5:
+                service(float_data)
+            else:
+                print("too long...STT hard")
 except KeyboardInterrupt as ke:
     print("finished")
 except Exception as e:
