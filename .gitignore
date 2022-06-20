@@ -11,6 +11,7 @@ wav2vec2-large-xlsr-ko-demo/
 Assets/
 service_1/
 outputs/
+stt_windows_client/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
