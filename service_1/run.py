@@ -18,8 +18,11 @@ running= True
 
 try:
     with mic:
-        procs = []
-        print('start running')
+        pass
+    print("Set minimum energy threshold to {}".format(rec.energy_threshold))
+    procs = []
+    print('start running')
+    with mic:
         while running:
             sig = rec.listen(mic).get_wav_data(sr,2)
             data_s16 = np.frombuffer(sig, dtype=np.int16, count=len(sig)//2)
