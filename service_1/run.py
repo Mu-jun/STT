@@ -63,7 +63,12 @@ if __name__ == "__main__":
         sig = get_q()
         # print(sig.shape, sig,dtype)
         sig = freq_filter(sig) ### change
-        threshold = np.max(np.abs(sig))
+        
+        # 시그마 규칙
+        sigma_rule_num = 3
+        sig = np.abs(sig)
+        threshold = np.min(sig) + (np.std(sig) * sigma_rule_num )
+        
         print("init complete")
         print("threshold :",threshold)
         with sd.InputStream(samplerate=sr, channels=ch, callback=callback):
