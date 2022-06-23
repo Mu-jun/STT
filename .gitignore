@@ -11,6 +11,7 @@ wav2vec2-large-xlsr-ko-demo/
 Assets/
 outputs/
 stt_windows_client/
+conda_env_STT.cmd
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

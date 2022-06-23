@@ -1,1 +1,1 @@
-%userprofile%\miniconda3\Scripts\activate.bat STT
+%userprofile%\anaconda3\Scripts\activate.bat STT
