@@ -107,7 +107,7 @@ class ServiceModel():
         pred = self.model_forward(array)
         pred_str = self.pred_decode(pred)
         remove_pad_token = re.sub('<pad>','',pred_str[0])
-        suggestion = self.sym_spell.lookup_compound(remove_pad_token, max_edit_distance=1)
+        suggestion = self.sym_spell.lookup_compound(remove_pad_token, max_edit_distance=2)
         join_jamo = join_jamos(suggestion[0].term)
         return join_jamo
     

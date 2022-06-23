@@ -30,7 +30,7 @@ def callback(indata, frames, time, status):
 ft = signal.firwin(1500,[300,3000],pass_zero=False,fs=sr)
 
 def freq_filter(array):
-    if len(array) > 1600:
+    if len(array) > 2000:
         return signal.lfilter(ft,[1.0],array)
     else:
         return None
