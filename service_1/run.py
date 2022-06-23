@@ -4,6 +4,7 @@ import sounddevice as sd
 from queue import Queue
 import time
 import sys
+from scipy import signal
 
 from model import ServiceModel
 
@@ -20,19 +21,22 @@ def rms(array):
     return np.sqrt( np.mean( np.array(array) **2 ) )
 
 def callback(indata, frames, time, status):
-    global threshold, sig_flag, cnt, pause_cnt
     if status:
         print(status, file=sys.stderr)
     q.put(indata.copy())
+    
+### new
+    
+ft = signal.firwin(1500,[300,3000],pass_zero=False,fs=sr)
 
-def hpss(array):
-    if len(array) > 2048:
-        stft = librosa.stft(array)
-        hamonic, _ = librosa.decompose.hpss(stft)
-        return librosa.istft(hamonic)
+def freq_filter(array):
+    if len(array) > 1600:
+        return signal.lfilter(ft,[1.0],array)
     else:
         return None
-    
+   
+###
+
 def get_q():
     array = []
     while not q.empty():
@@ -57,20 +61,20 @@ if __name__ == "__main__":
         with sd.InputStream(samplerate=sr, channels=ch, callback=callback):
             time.sleep(2)
         sig = get_q()
-        print(sig.dtype)
-        sig = hpss(sig)
+        # print(sig.shape, sig,dtype)
+        sig = freq_filter(sig) ### change
         threshold = np.max(np.abs(sig))
         print("init complete")
         print("threshold :",threshold)
         with sd.InputStream(samplerate=sr, channels=ch, callback=callback):
             sig = np.zeros(1,dtype=np.float32)
-            print(sig.dtype)
+            # print(sig.shape, sig,dtype)
             print("running start")
             
             while running:
                 # time.sleep(0.05)
                 sig = np.concatenate((sig, get_q()))
-                harmonic_sig = hpss(sig)
+                harmonic_sig = freq_filter(sig) ### change
                 
                 if harmonic_sig is None:
                     continue
