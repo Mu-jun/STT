@@ -10,7 +10,9 @@ from symspellpy import SymSpell, Verbosity
 
 class ServiceModel():
     def __init__(self):
-        self.session = onnxruntime.InferenceSession('./Assets/jamo_base_model.onnx')
+        sess_options = onnxruntime.SessionOptions()
+        sess_options.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_ENABLE_ALL
+        self.session = onnxruntime.InferenceSession("./Assets/jamo_base_model.onnx", sess_options)
         
         with open('./Assets/vocab_jamos.json','r') as f:
             self.word_to_index = json.load(f)
