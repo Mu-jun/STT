@@ -14,7 +14,7 @@ class ServiceModel():
     def __init__(self):
         sess_options = onnxruntime.SessionOptions()
         sess_options.graph_optimization_level = onnxruntime.GraphOptimizationLevel.ORT_ENABLE_ALL
-        self.session = onnxruntime.InferenceSession("./Assets/jamo_base_model.onnx", sess_options)
+        self.session = onnxruntime.InferenceSession("./Assets/quantized_jamo_base_model.onnx", sess_options)
         
         self.processor = Wav2Vec2FeatureExtractor(
             feature_size=1,
